@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration</title>
+</head>
+<body>
+<div th:align="center" class="tg">
+    <h1>All users table</h1>
+    <br/>
+    <br/>
+    <table border="2">
+        <tr>
+            <th>ID</th>
+            <th>LOGIN</th>
+            <th>PASSWORD</th>
+            <th>NAME</th>
+            <th>LASTNAME</th>
+            <th>AGE</th>
+            <th>SALARY</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="user : ${allUsers}">
+            <td th:text="${user.id}">ID</td>
+            <td th:text="${user.login}">LOGIN</td>
+            <td th:text="${user.password}">PASSWORD</td>
+            <td th:text="${user.name}">NAME</td>
+            <td th:text="${user.lastName}">LASTNAME</td>
+            <td th:text="${user.age}">AGE</td>
+            <td th:text="${user.salary}">SALARY</td>
+            <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
+            <td><a th:href="@{/remove/{id}(id=${user.id})}">Delete</a></td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+    <a href="/admin/add.html">Need a new user? No problem! Click</a>
+    <br/>
+    <br/>
+    <a th:href="@{/logout}">Logout</a>
+    <br/>
+</div>
+</body>
+</html>
