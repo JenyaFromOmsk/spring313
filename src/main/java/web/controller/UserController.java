@@ -106,12 +106,13 @@ public class UserController {
         userService.addUser(userUser);
         
         Role roleAdmin = new Role();
-        Role roleUser = new Role();
         roleService.addRole(roleAdmin);
-        roleService.addRole(roleUser);
         roleAdmin.setRole("ROLE_ADMIN");
-        roleUser.setRole("ROLE_USER");
         roleService.updateRole(roleAdmin);
+        
+        Role roleUser = new Role();
+        roleService.addRole(roleUser);
+        roleUser.setRole("ROLE_USER");
         roleService.updateRole(roleUser);
         
         Set<Role> setRoleAdmin = new HashSet<>();
