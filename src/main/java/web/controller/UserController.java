@@ -99,39 +99,39 @@ public class UserController {
 
     @PostConstruct
     public void addTestUsers() {
-        User admin = new User();
-        User user = new User();
+        
+        User userAdmin = new User();
+        userService.addUser(userAdmin);
+        User userUser = new User();
+        userService.addUser(userUser);
+        
+        Role roleAdmin = new Role();
+        Role roleUser = new Role();
+        roleService.addRole(roleAdmin);
+        roleService.addRole(roleUser);
+        roleAdmin.setRole("ROLE_ADMIN");
+        roleUser.setRole("ROLE_USER");
+        roleService.updateRole(roleAdmin);
+        roleService.updateRole(roleUser);
+        
+        Set<Role> setRoleAdmin = new HashSet<>();
+        setRoleAdmin.add(roleAdmin);
+        setRoleAdmin.add(roleUser);
 
-        userService.addUser(admin);
-        userService.addUser(user);
+        Set<Role> setRoleUser = new HashSet<>();
+        setRoleUser.add(roleUser);
 
-        Role role1 = new Role();
-        Role role2 = new Role();
+        userAdmin.setLogin("admin");
+        userAdmin.setPassword("admin");
+        userAdmin.setPassword(bCryptPasswordEncoder.encode(userAdmin.getPassword()));
+        userAdmin.setRole(setRoleAdmin);
+        userService.editUser(userAdmin);
 
-        roleService.addRole(role1);
-        roleService.addRole(role2);
-
-        role1.setRole("ROLE_ADMIN");
-        role2.setRole("ROLE_USER");
-
-        roleService.updateRole(role1);
-        roleService.updateRole(role2);
-
-        Set<Role> roles = new HashSet<>();
-        roles.add(role1);
-        roles.add(role2);
-
-        admin.setLogin("admin");
-        admin.setPassword("admin");
-        admin.setPassword(bCryptPasswordEncoder.encode(admin.getPassword()));
-        admin.setRole(roles);
-        userService.editUser(admin);
-
-        user.setLogin("user");
-        user.setPassword("user");
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(roles.stream().skip(1).collect(Collectors.toSet()));
-        userService.editUser(user);
+        userUser.setLogin("user");
+        userUser.setPassword("user");
+        userUser.setPassword(bCryptPasswordEncoder.encode(userUser.getPassword()));
+        userUser.setRole(setRoleUser);
+        userService.editUser(userUser);
     }
 
 }
