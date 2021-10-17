@@ -97,7 +97,7 @@ public class UserController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @PostConstruct
+    @PostConstruct 
     public void addTestUsers() {
         
         User userAdmin = new User();
