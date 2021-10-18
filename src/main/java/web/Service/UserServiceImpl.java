@@ -1,9 +1,7 @@
 package web.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.Dao.UserDao;
@@ -52,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User getUserId(Long id) {
+    public User getUserById(Long id) {
         return userDao.getUserId(id);
     }
 
@@ -65,6 +63,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public User getUserByLogin(String login) {
-        return userDao.getLogin(login);
+        return userDao.getUserByLogin(login);
     }
 }

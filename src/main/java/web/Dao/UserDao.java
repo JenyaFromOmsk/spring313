@@ -12,9 +12,9 @@ public interface UserDao {
 
     void deleteUserId (long id);
 
-    User getUserId(Long id);
+    User getUserById(Long id);
 
     List<User> getAllUsers();
 
-    User getLogin(String login);
+    User getUserByLogin(String login);
 }

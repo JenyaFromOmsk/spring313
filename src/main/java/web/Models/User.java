@@ -2,7 +2,6 @@ package web.Models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.Collection;

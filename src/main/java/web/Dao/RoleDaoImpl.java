@@ -23,7 +23,7 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public void deleteRoleId(long id) {
+    public void deleteRoleById(long id) {
         entityManager.remove(entityManager.find(Role.class, id));
     }
 
@@ -33,7 +33,7 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public Role getRoleName(String role) {
+    public Role getRoleByName(String role) {
         return entityManager.createQuery("SELECT role FROM Role role WHERE role.role=:role",
                 Role.class).setParameter("role", role).getSingleResult();
     }

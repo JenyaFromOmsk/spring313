@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserId(Long id) {
+    public User getUserById(Long id) {
         return entityManager.find(User.class, id);
     }
 
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getLogin(String login) {
+    public User getUserByLogin(String login) {
         TypedQuery<User> typedQuery = entityManager.createQuery("SELECT user FROM User user WHERE user.login=:login",
                 User.class).setParameter("login", login);
     return typedQuery.getSingleResult();
