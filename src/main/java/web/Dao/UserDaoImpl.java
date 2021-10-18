@@ -5,7 +5,6 @@ import web.Models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 
@@ -44,8 +43,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserByLogin(String login) {
-        TypedQuery<User> typedQuery = entityManager.createQuery("SELECT user FROM User user WHERE user.login=:login",
-                User.class).setParameter("login", login);
-    return typedQuery.getSingleResult();
+    return entityManager.createQuery("SELECT user FROM User user WHERE user.login=:login",
+            User.class).setParameter("login", login).getSingleResult();
     }
 }
