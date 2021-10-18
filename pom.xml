@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>spring242</artifactId>
+    <artifactId>spring_242</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -88,7 +88,7 @@
     </dependencies>
 
     <build>
-        <finalName>spring242</finalName>
+        <finalName>spring_242</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
