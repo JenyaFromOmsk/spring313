@@ -10,9 +10,9 @@ public interface RoleService {
 
     void updateRole(Role role);
 
-    void deleteRoleId(long id);
+    void deleteRoleById(long id);
 
     List<Role> getAllRoles();
 
-    Role getRoleName(String name);
+    Role getRoleByName(String name);
 }

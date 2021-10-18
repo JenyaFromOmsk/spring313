@@ -23,9 +23,6 @@ public class UserController {
     private RoleService roleService;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
     public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
@@ -61,10 +58,9 @@ public class UserController {
     public String addUser(@ModelAttribute User user, @RequestParam(value = "choiceOfRole") String[] choiceOfRole) {
         Set<Role> set = new HashSet<>();
         for (String role : choiceOfRole) {
-            set.add(roleService.getRoleName(role));
+            set.add(roleService.getRoleByName(role));
         }
         user.setRole(set);
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.addUser(user);
         return "redirect:/admin";
     }
@@ -80,7 +76,7 @@ public class UserController {
     public String editUser(@ModelAttribute User user, @RequestParam(value = "checkBoxRoles") String[] checkBoxRoles) {
         Set<Role> set = new HashSet<>();
         for (String roles : checkBoxRoles) {
-            set.add(roleService.getRoleName(roles));
+            set.add(roleService.getRoleByName(roles));
         }
         user.setRole(set);
         userService.editUser(user);
@@ -89,49 +85,8 @@ public class UserController {
 
     @GetMapping(value = "/remove/{id}")
     public String removeUser(@PathVariable("id") long id) {
-        userService.deleteUserId(id);
+        userService.deleteUserById(id);
         return "redirect:/admin";
-    }
-
-    public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
-
-    @PostConstruct
-    public void addTestUsers() {
-        User admin = new User();
-        User user = new User();
-
-        userService.addUser(admin);
-        userService.addUser(user);
-
-        Role role1 = new Role();
-        Role role2 = new Role();
-
-        roleService.addRole(role1);
-        roleService.addRole(role2);
-
-        role1.setRole("ROLE_ADMIN");
-        role2.setRole("ROLE_USER");
-
-        roleService.updateRole(role1);
-        roleService.updateRole(role2);
-
-        Set<Role> roles = new HashSet<>();
-        roles.add(role1);
-        roles.add(role2);
-
-        admin.setLogin("admin");
-        admin.setPassword("admin");
-        admin.setPassword(bCryptPasswordEncoder.encode(admin.getPassword()));
-        admin.setRole(roles);
-        userService.editUser(admin);
-
-        user.setLogin("user");
-        user.setPassword("user");
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(roles.stream().skip(1).collect(Collectors.toSet()));
-        userService.editUser(user);
     }
 
 }

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Repository;
 import web.Models.Role;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -35,8 +34,7 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role getRoleName(String role) {
-        TypedQuery<Role> queryRole = entityManager.createQuery("SELECT role FROM Role role WHERE role.role=:role",
-                Role.class).setParameter("role", role);
-        return queryRole.getSingleResult();
+        return entityManager.createQuery("SELECT role FROM Role role WHERE role.role=:role",
+                Role.class).setParameter("role", role).getSingleResult();
     }
 }

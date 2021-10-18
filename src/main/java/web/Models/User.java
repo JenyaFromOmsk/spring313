@@ -2,6 +2,7 @@ package web.Models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -43,9 +44,8 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Long id, String login, String password, String name, String lastName, int age,
+    public User(String login, String password, String name, String lastName, int age,
                 int salary, Set<Role> role) {
-        this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;
@@ -55,16 +55,9 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public static UserDetails fromUser(User user) {
-        return new org.springframework.security.core.userdetails.User(
-                user.getLogin(),
-                user.getPassword(),
-                user.isEnabled(),
-                user.isAccountNonExpired(),
-                user.isCredentialsNonExpired(),
-                user.isAccountNonLocked(),
-                user.getRole()
-        );
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
 

@@ -1,6 +1,7 @@
 package web.Models;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,8 +20,7 @@ public class Role implements GrantedAuthority {
     @ManyToMany(mappedBy = "role")
     private Set<User> users;
 
-    public Role(Long id, String role) {
-        this.id = id;
+    public Role(String role) {
         this.role = role;
     }
 

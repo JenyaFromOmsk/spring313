@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import web.Models.User;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private UserService userService;
 
@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String s) {
-        User user = userService.getLogin(s);
+        User user = userService.getUserByLogin(s);
         return user;
     }
 }

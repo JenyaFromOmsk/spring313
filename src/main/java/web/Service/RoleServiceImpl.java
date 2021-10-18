@@ -31,7 +31,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public void deleteRoleId(long id) {
+    public void deleteRoleById(long id) {
         roleDao.deleteRoleId(id);
     }
 
@@ -43,7 +43,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional(readOnly = true)
-    public Role getRoleName(String role) {
+    public Role getRoleByName(String role) {
         return roleDao.getRoleName(role);
     }
 
