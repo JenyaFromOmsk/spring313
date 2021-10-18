@@ -32,7 +32,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional
     public void deleteRoleById(long id) {
-        roleDao.deleteRoleId(id);
+        roleDao.deleteRoleById(id);
     }
 
     @Override
