@@ -57,7 +57,7 @@ public class UserController {
     @PostMapping(value = "/admin/add-user")
     public String addUser(@ModelAttribute User user, @RequestParam(value = "checkBoxRoles") String[] checkBoxRoles) {
         Set<Role> set = new HashSet<>();
-        for (String role : choiceOfRole) {
+        for (String role : checkBoxRoles) {
             set.add(roleService.getRoleByName(role));
         }
         user.setRole(set);
