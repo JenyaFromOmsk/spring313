@@ -25,7 +25,6 @@ public class TestUserInit {
     }
 
     @PostConstruct
-    @Bean
     public void addTestUser() {
         Role roleAdmin = new Role("ROLE_ADMIN");
         Role roleUser = new Role("ROLE_USER");
