@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.Dao.UserDao;
 import web.Models.User;
+
 import java.util.List;
 
 @Service
@@ -19,18 +20,13 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
-    @Autowired
-    public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
 
     @Override
     @Transactional
     public void addUser(User user) {
-        if (user.getPassword().length() <= 32) {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            userDao.addUser(user);
-        }
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userDao.addUser(user);
+
     }
 
     @Override
@@ -42,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void editUser(User user) {
-        if (user.getPassword().length() < 32) {
+        if (!user.getPassword().equals(getUserById(user.getId()).getPassword())) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
         userDao.editUser(user);
