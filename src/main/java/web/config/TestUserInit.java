@@ -1,7 +1,5 @@
 package web.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import web.Models.Role;
 import web.Models.User;
@@ -15,17 +13,17 @@ import java.util.Set;
 @Configuration
 public class TestUserInit {
 
+
     private UserService userService;
     private RoleService roleService;
 
-    @Autowired
+
     public TestUserInit(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
     @PostConstruct
-    @Bean
     public void addTestUser() {
         Role roleAdmin = new Role("ROLE_ADMIN");
         Role roleUser = new Role("ROLE_USER");

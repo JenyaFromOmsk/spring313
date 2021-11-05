@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import web.Models.User;
 import java.util.List;
 
+@Service
 public interface UserService {
 
     void addUser(User user);
@@ -17,4 +18,8 @@ public interface UserService {
     List<User> listUsers();
 
     User getUserByLogin(String login);
+
+    User getUserByName(String name);
+
+    boolean existsUserById(long id);
 }

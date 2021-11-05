@@ -1,11 +1,10 @@
-package web.config;
+package web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@SpringBootApplication(scanBasePackages = "web")
-@EntityScan("web.Models")
+
+@SpringBootApplication()
 public class Application {
 
     public static void main(String[] args) {

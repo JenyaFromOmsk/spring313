@@ -10,6 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "user", schema = "users")
 public class User implements UserDetails {
+
     @Id
     @Column(name = "user_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +40,6 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> role;
 
-
     public User() {
     }
 
@@ -58,7 +58,6 @@ public class User implements UserDetails {
         this.login = login;
         this.password = password;
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -115,10 +114,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -153,6 +148,11 @@ public class User implements UserDetails {
 
     public void setRole(Set<Role> role) {
         this.role = role;
+    }
+
+
+    public String getName() {
+        return name;
     }
 
     @Override

@@ -1,9 +1,11 @@
 package web.Service;
 
+import org.springframework.stereotype.Service;
 import web.Models.Role;
 
 import java.util.List;
 
+@Service
 public interface RoleService {
 
     void addRole(Role role);

@@ -3,14 +3,14 @@ package web.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import web.Dao.UserDao;
 import web.Models.User;
 
 import java.util.List;
 
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
+
 
     private UserDao userDao;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -21,44 +21,54 @@ public class UserServiceImpl implements UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    public UserServiceImpl() {
+    }
+
     @Override
-    @Transactional
     public void addUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userDao.addUser(user);
-
+        userDao.save(user);
     }
 
     @Override
-    @Transactional
     public void deleteUserById(long id) {
-        userDao.deleteUserId(id);
+        userDao.deleteById(id);
     }
 
     @Override
-    @Transactional
     public void editUser(User user) {
         if (!user.getPassword().equals(getUserById(user.getId()).getPassword())) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
-        userDao.editUser(user);
+        userDao.save(user);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public User getUserById(Long id) {
         return userDao.getUserById(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<User> listUsers() {
-        return userDao.getAllUsers();
+        return userDao.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public User getUserByLogin(String login) {
-        return userDao.getUserByLogin(login);
+        return userDao.findByLogin(login);
+    }
+
+    @Override
+    public User getUserByName(String name) {
+        return userDao.findByName(name);
+    }
+
+    @Override
+    public boolean existsUserById(long id) {
+        if (userDao.existsById(id)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

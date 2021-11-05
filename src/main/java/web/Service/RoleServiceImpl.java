@@ -2,7 +2,6 @@ package web.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import web.Models.Role;
 import web.Dao.RoleDao;
 import java.util.List;
@@ -18,33 +17,28 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @Transactional
     public void addRole(Role role) {
-        roleDao.addRole(role);
+        roleDao.save(role);
     }
 
     @Override
-    @Transactional
     public void updateRole(Role role) {
-        roleDao.editRole(role);
+        roleDao.save(role);
     }
 
     @Override
-    @Transactional
     public void deleteRoleById(long id) {
-        roleDao.deleteRoleById(id);
+        roleDao.deleteById(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Role> getAllRoles() {
-        return roleDao.getAllRoles();
+        return roleDao.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Role getRoleByName(String role) {
-        return roleDao.getRoleByName(role);
+        return roleDao.findByRole(role);
     }
 
 }
